@@ -46,7 +46,7 @@ app.post('/api/checkout',async (req,res)=>{
                 PartyA:phone,
                 PartyB:process.env.MPESA_SHORTCODE,
                 PhoneNumber:phone,
-                CallBackURL:"https://mpesa-backend-pj42.onrender.com/",
+                CallBackURL:"https://mpesa-backend-pj42.onrender.com",
                 AccountReference:order.id,
                 TransactionDesc:"E-commerce checkput"
             },
