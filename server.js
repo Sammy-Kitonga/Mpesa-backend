@@ -41,7 +41,7 @@ app.post('/api/checkout',async (req,res)=>{
                 BusinessShortCode:process.env.MPESA_SHORTCODE,
                 Password:password,
                 Timestamp:timestamp,
-                TransactionType: "CustomerPaybillOnline",
+                TransactionType: "CustomerPayBillOnline",
                 Amount:amount,
                 PartyA:phone,
                 PartyB:process.env.MPESA_SHORTCODE,
