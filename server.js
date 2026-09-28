@@ -30,8 +30,8 @@ app.post('/api/checkout',async (req,res)=>{
         )
         const token=tokenRes.data.access_token
 
-        const timestamp=new Date().toISOString.replace(/[^0-9]/g,'').slice(0,14)
-        const password=Buffer.from('${process.env.MPESA_SHORTCODE}${process.env.MPESA_PASSKEY}${timestamp}').toString('base64')
+        const timestamp=new Date().toISOString().replace(/[^0-9]/g,'').slice(0,14)
+        const password=Buffer.from(`${process.env.MPESA_SHORTCODE}${process.env.MPESA_PASSKEY}${timestamp}`).toString('base64')
 
         const order=await prisma.order.create({data:{phone,amount}})
 
@@ -42,11 +42,11 @@ app.post('/api/checkout',async (req,res)=>{
                 Password:password,
                 Timestamp:timestamp,
                 TransactionType: "CustomerPaybillOnline",
-                Ampunt:amount,
+                Amount:amount,
                 PartyA:phone,
                 PartyB:process.env.MPESA_SHORTCODE,
                 PhoneNumber:phone,
-                CallBackURL:"https://mpesa-backend-pj42.onrender.com",
+                CallBackURL:"https://mpesa-backend-pj42.onrender.com/api/callback",
                 AccountReference:order.id,
                 TransactionDesc:"E-commerce checkput"
             },
