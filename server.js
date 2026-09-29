@@ -19,6 +19,20 @@ app.get('/api/products', async (req, res) => {
     }
   });
 
+  app.get('/api/products/:id', async(req,res)=>{
+    try{
+        const product= await prisma.products.findUnique({
+            where:{id:req.params.id},
+            include:{reviews:true}
+        })
+        if(!product) return res.status(404).json({error:"Product not found"})
+        res.json(product)
+    } catch(error){
+        console.error(error)
+        res.status(500).json({error:"Failed to fetch product"})
+    }
+  })
+
 app.post('/api/checkout',async (req,res)=>{
     const {phone,amount}=req.body
 
