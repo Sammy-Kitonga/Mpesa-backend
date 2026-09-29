@@ -21,7 +21,7 @@ app.get('/api/products', async (req, res) => {
 
   app.get('/api/products/:id', async(req,res)=>{
     try{
-        const product= await prisma.products.findUnique({
+        const product= await prisma.product.findUnique({
             where:{id:req.params.id},
             include:{reviews:true}
         })
